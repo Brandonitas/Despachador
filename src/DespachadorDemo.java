@@ -21,24 +21,40 @@ public class DespachadorDemo {
 		*/
 		
 		Queue<String> q=new LinkedList<String>();
+		Queue<Proceso> despachador=new LinkedList<Proceso>();
+	
+		ArrayList<Proceso> listprocesos = new ArrayList<Proceso>();
 		
 		try{
 			File f = new File("Demo.txt");
 			Scanner s = new Scanner(f);
 			while(s.hasNextLine()){
 				String line = s.nextLine();
-				String[] micros = line.split(",");
-				for(int i = 0; i<micros.length; i++){
-					//System.out.println(micros[i]);
-					q.add(micros[i]);
-				}
+				String[] proceso = line.split(",");
+				Proceso p = new Proceso();
+				p.setNombre(proceso[0]);
+				p.setTiempoEjecucion(Integer.parseInt(proceso[1]));
+				p.setNumeroBloqueo(Integer.parseInt(proceso[2]));
+				p.setPrioridad(Integer.parseInt(proceso[3]));
+				p.setTiempoListo(Integer.parseInt(proceso[4]));
+				listprocesos.add(p);
+				//System.out.println(line);
+			
 			}
 			s.close(); 
 		}catch(FileNotFoundException e){
 			System.out.println("El archivo no existe...");
 		}
 		
-		System.out.println(q.poll());
+		
+		Collections.sort(listprocesos);
+		
+		for(Proceso p : listprocesos){
+			despachador.add(p);
+		}
+		
+		
+		
 
 	}
 
