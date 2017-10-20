@@ -4,8 +4,11 @@ public class Proceso implements Comparable<Proceso>{
 	int tiempoEjecucion;
 	int tiempoBloqueo;
 	int numeroBloqueo;
+	int tiempoTotalProceso;
 	int tiempoInicial;
 	int tiempoFinal;
+	int tiempoVencimientoCuantum; 
+	int tiempoCambiodeContexto;
 	int prioridad;
 	
 	public int compareTo(Proceso proceso){
@@ -52,6 +55,8 @@ public class Proceso implements Comparable<Proceso>{
 
 	public void setTiempoBloqueo(int tiempoBloqueo) {
 		this.tiempoBloqueo = tiempoBloqueo;
+		
+		
 	}
 
 	public int getNumeroBloqueo() {
@@ -60,6 +65,8 @@ public class Proceso implements Comparable<Proceso>{
 
 	public void setNumeroBloqueo(int numeroBloqueo) {
 		this.numeroBloqueo = numeroBloqueo;
+		this.tiempoBloqueo=numeroBloqueo*DespachadorDemo.tb;
+		
 	}
 
 	public int getTiempoInicial() {
@@ -92,6 +99,35 @@ public class Proceso implements Comparable<Proceso>{
 
 	public void setTiempoListo(int tiempoListo) {
 		this.tiempoListo = tiempoListo;
+	}
+	
+	public int getTiempoTotalProceso() {
+		return tiempoTotalProceso;
+	}
+
+	public void setTiempoTotalProceso(int tiempoTotalProceso) {
+		this.tiempoTotalProceso = tiempoTotalProceso;
+	}
+
+	public int getTiempoVencimientoCuantum() {
+		return tiempoVencimientoCuantum;
+	}
+
+	public void setTiempoVencimientoCuantum(int tiempoVencimientoCuantum) {
+		this.tiempoVencimientoCuantum = tiempoVencimientoCuantum;
+	}
+
+	public int getTiempoCambiodeContexto() {
+		return tiempoCambiodeContexto;
+	}
+
+	public void setTiempoCambiodeContexto(int tiempoCambiodeContexto) {
+		this.tiempoCambiodeContexto = tiempoCambiodeContexto;
+	}
+
+	public void CalcTiempoTotal(){
+		tiempoTotalProceso = tiempoCambiodeContexto+tiempoEjecucion+tiempoBloqueo+
+				tiempoVencimientoCuantum;
 	}
 
 }

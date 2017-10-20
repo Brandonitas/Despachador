@@ -2,9 +2,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 public class DespachadorDemo {
+	public static int micros=2;
+	public static int cuantum=3000;
+	public static int tcc=15;
+	public static int tb=15;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		Scanner scn =new Scanner(System.in);
 		
 		/*System.out.println("Ingresa el numero de microprocesadores");
@@ -20,9 +24,12 @@ public class DespachadorDemo {
 		int tb= scn.nextInt();
 		*/
 		
-		Queue<String> q=new LinkedList<String>();
+		ArrayList<Microprocesador> micros = new ArrayList<Microprocesador>();
+		for(int i=0;i<DespachadorDemo.micros;i++){
+			micros.add(new Microprocesador(cuantum));
+		}
+		
 		Queue<Proceso> despachador=new LinkedList<Proceso>();
-	
 		ArrayList<Proceso> listprocesos = new ArrayList<Proceso>();
 		
 		try{
@@ -54,8 +61,33 @@ public class DespachadorDemo {
 		}
 		
 		
+		int n=0;
+		while(!despachador.isEmpty()){
+			Proceso p = despachador.poll();
+			Microprocesador temp = micros.get(n);
+			for(Microprocesador m : micros){
+				if(m.getTiempoTotal()==0){
+					temp=m;
+					break;
+				}else if(m.getTiempoTotal()<p.getTiempoListo()){
+					n=0;
+					temp=m;
+					break;
+					
+				}else if(m.getTiempoTotal()<temp.getTiempoTotal()){
+					temp=m;
+				}
+			}
+			
+			temp.agregarProceso(p);
+		}
 		
-
+		for(Microprocesador m: micros){
+			System.out.println(m);
+		}
+		
+		
+		
 	}
 
 }
