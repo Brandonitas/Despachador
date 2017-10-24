@@ -61,21 +61,32 @@ public class DespachadorDemo {
 		}
 		
 		
-		int n=0;
+		
+		
 		while(!despachador.isEmpty()){
 			Proceso p = despachador.poll();
-			Microprocesador temp = micros.get(n);
-			for(Microprocesador m : micros){
-				if(m.getTiempoTotal()==0){
-					temp=m;
+		
+			Microprocesador temp = micros.get(0);
+			
+			boolean bandera=false;
+			for(Microprocesador o:micros){
+				if(o.getTiempoTotal()==0){
+					bandera=true;
+					temp=o;
 					break;
-				}else if(m.getTiempoTotal()<p.getTiempoListo()){
-					n=0;
-					temp=m;
-					break;
+				}
+			}
+			//Calcular tiempo muerto 
+			if(!bandera){
+				for(Microprocesador m : micros){
+					if(m.getTiempoTotal()<p.getTiempoListo()){
+						temp=m;
+						break;
+						
+					}else if(m.getTiempoTotal()<temp.getTiempoTotal()){
+						temp=m;
+					}
 					
-				}else if(m.getTiempoTotal()<temp.getTiempoTotal()){
-					temp=m;
 				}
 			}
 			

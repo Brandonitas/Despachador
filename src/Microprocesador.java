@@ -19,15 +19,26 @@ public class Microprocesador {
 	
 	public void agregarProceso(Proceso p){
 		if(tiempoTotal==0){
+			if(tiempoTotal<p.getTiempoListo()){
+				Proceso pMuerto= new Proceso();
+				pMuerto.setTiempoInicial(tiempoTotal);
+				pMuerto.setTiempoFinal(p.getTiempoListo());
+				pMuerto.setTiempoEjecucion(pMuerto.getTiempoFinal()-pMuerto.getTiempoInicial());
+				pMuerto.setNombre("Tiempo Muerto");
+				tiempoTotal=p.getTiempoListo();
+				p.setTiempoCambiodeContexto(0);
+				listaProcesos.add(pMuerto);
+			}else{
 			tiempoTotal=p.getTiempoListo();
 			p.setTiempoCambiodeContexto(0);
+			}
 		}
 		else if(tiempoTotal<p.getTiempoListo()){
 			Proceso pMuerto= new Proceso();
 			pMuerto.setTiempoInicial(tiempoTotal);
 			pMuerto.setTiempoFinal(p.getTiempoListo());
 			pMuerto.setTiempoEjecucion(pMuerto.getTiempoFinal()-pMuerto.getTiempoInicial());
-			pMuerto.setNombre("Tiempo Muerto");
+			pMuerto.setNombre("-");
 			tiempoTotal=p.getTiempoListo();
 			p.setTiempoCambiodeContexto(0);
 			listaProcesos.add(pMuerto);
@@ -86,12 +97,34 @@ public class Microprocesador {
 	}
 	
 	public String toString(){
-		String mensaje = "Microprocesador: "+id;
+		String mensaje = "Microprocesador: "+id +"\n";
+		mensaje+="PR     TCC     TEE   TVC     TB     TT     TI     TF \n";
 		for(Proceso p: listaProcesos){
-			mensaje+=p.getNombre()+" ,,,, ";
+			mensaje+=concat(p.getNombre())+" ";
+			mensaje+=concat(p.getTiempoCambiodeContexto()+" ");
+			mensaje+=concat(p.getTiempoEjecucion()+" ");
+			mensaje+=concat(p.getTiempoVencimientoCuantum()+" ");
+			mensaje+=concat(p.getTiempoBloqueo()+" ");
+			mensaje+=concat(p.getTiempoTotalProceso()+" ");
+			mensaje+=concat(p.getTiempoInicial()+" ");
+			mensaje+=concat(p.getTiempoFinal()+" ");
+			mensaje+="\n";
+			
+			
 		}
+		mensaje+="\n";
 		return mensaje; 
 		
+	}
+	
+	public String concat(String mensaje){
+		int n=7-mensaje.length();
+		StringBuilder aux= new StringBuilder(mensaje);
+		for(int i=0;i<n;i++){
+			aux.append(" ");
+		}
+		
+		return aux.toString();
 	}
 	
 	
