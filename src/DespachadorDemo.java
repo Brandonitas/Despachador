@@ -11,18 +11,24 @@ public class DespachadorDemo {
 
 		Scanner scn =new Scanner(System.in);
 		
-		/*System.out.println("Ingresa el numero de microprocesadores");
-		int micros = scn.nextInt();
-		
-		System.out.println("Ingresa el valor del cuantum");
-		int cuantum = scn.nextInt();
-		
-		System.out.println("Ingresa el tiempo de cambio de contexto");
-		int tcc = scn.nextInt();
-		
-		System.out.println("Ingresa el tiempo de bloqueo");
-		int tb= scn.nextInt();
-		*/
+		System.out.println("¿Desea utilizar los valores por default? 1. Sí   2. No");
+		System.out.print("Ingrese opción: ");
+		int opcion = Integer.parseInt(scn.nextLine());
+
+		if (opcion == 2)
+		{
+			System.out.print("Ingresa el numero de microprocesadores: ");
+			micros = Integer.parseInt(scn.nextLine());
+			
+			System.out.print("Ingresa el valor del cuantum: ");
+			cuantum = Integer.parseInt(scn.nextLine());
+			
+			System.out.print("Ingresa el tiempo de cambio de contexto: ");
+			tcc = Integer.parseInt(scn.nextLine());
+			
+			System.out.print("Ingresa el tiempo de bloqueo: ");
+			tb = Integer.parseInt(scn.nextLine());
+		}
 		
 		ArrayList<Microprocesador> micros = new ArrayList<Microprocesador>();
 		for(int i=0;i<DespachadorDemo.micros;i++){

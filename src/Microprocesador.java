@@ -98,16 +98,16 @@ public class Microprocesador {
 	
 	public String toString(){
 		String mensaje = "Microprocesador: "+id +"\n";
-		mensaje+="PR     TCC     TEE   TVC     TB     TT     TI     TF \n";
+		mensaje+="PR     TCC    TEE    TVC    TB     TT     TI     TF     \n";
 		for(Proceso p: listaProcesos){
-			mensaje+=concat(p.getNombre())+" ";
-			mensaje+=concat(p.getTiempoCambiodeContexto()+" ");
-			mensaje+=concat(p.getTiempoEjecucion()+" ");
-			mensaje+=concat(p.getTiempoVencimientoCuantum()+" ");
-			mensaje+=concat(p.getTiempoBloqueo()+" ");
-			mensaje+=concat(p.getTiempoTotalProceso()+" ");
-			mensaje+=concat(p.getTiempoInicial()+" ");
-			mensaje+=concat(p.getTiempoFinal()+" ");
+			mensaje+=concat(p.getNombre())+"";
+			mensaje+=concat(p.getTiempoCambiodeContexto()+"");
+			mensaje+=concat(p.getTiempoEjecucion()+"");
+			mensaje+=concat(p.getTiempoVencimientoCuantum()+"");
+			mensaje+=concat(p.getTiempoBloqueo()+"");
+			mensaje+=concat(p.getTiempoTotalProceso()+"");
+			mensaje+=concat(p.getTiempoInicial()+"");
+			mensaje+=concat(p.getTiempoFinal()+"");
 			mensaje+="\n";
 			
 			
