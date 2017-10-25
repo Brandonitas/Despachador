@@ -8,6 +8,7 @@ public class Microprocesador {
 	private ArrayList<Proceso> listaProcesos = new ArrayList<Proceso>();
 	private int tiempoTotal;
 	private int tamanoCuantum;
+	private int tcc;
 	
 
 	public Microprocesador(int tamanoCuantum) {
@@ -47,6 +48,7 @@ public class Microprocesador {
 		}
 		
 		p.CalcTiempoTotal();
+		p.setTiempoVencimientoCuantum(vencimiento(p.tiempoEjecucion));
 	
 		
 		p.setTiempoInicial(tiempoTotal);
@@ -98,7 +100,7 @@ public class Microprocesador {
 	
 	public String toString(){
 		String mensaje = "Microprocesador: "+id +"\n";
-		mensaje+="PR     TCC    TEE    TVC    TB     TT     TI     TF     \n";
+		mensaje+="PR     TCC    TE     TVC    TB     TT     TI     TF     \n";
 		for(Proceso p: listaProcesos){
 			mensaje+=concat(p.getNombre())+"";
 			mensaje+=concat(p.getTiempoCambiodeContexto()+"");
@@ -126,7 +128,20 @@ public class Microprocesador {
 		
 		return aux.toString();
 	}
-	
-	
 
+	// Cuantum = 300
+	// 100 -> 0
+	// 300 -> 0
+	// 395 -> 1
+	// 
+
+	public int vencimiento(int ej){
+		int ven = 0;
+		if (ej > tamanoCuantum)
+		{
+			ven = (int)Math.ceil((ej * 1.0)/tamanoCuantum) - 1;
+		}
+		
+		return ven * DespachadorDemo.tcc; 
+	}
 }

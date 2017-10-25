@@ -29,6 +29,8 @@ public class DespachadorDemo {
 			System.out.print("Ingresa el tiempo de bloqueo: ");
 			tb = Integer.parseInt(scn.nextLine());
 		}
+
+		System.out.println();
 		
 		ArrayList<Microprocesador> micros = new ArrayList<Microprocesador>();
 		for(int i=0;i<DespachadorDemo.micros;i++){
@@ -102,9 +104,6 @@ public class DespachadorDemo {
 		for(Microprocesador m: micros){
 			System.out.println(m);
 		}
-		
-		
-		
 	}
 
 }
